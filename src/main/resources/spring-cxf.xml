@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	
+	<context:component-scan base-package="com.gk.webservice.server.spring" />
+	
+	<jaxws:server id="helloWord" serviceClass="com.gk.webservice.server.spring.jaxws.HelloWorld" address="/helloWorld">
+		<jaxws:serviceBean>
+			<ref bean="helloWorldBean"/>
+		</jaxws:serviceBean>
+	</jaxws:server>
+	
+	<jaxws:server id="userService" serviceClass="com.gk.webservice.server.spring.jaxws.UserService" address="/user">
+		<jaxws:serviceBean>
+			<ref bean="userServiceBean"/>
+		</jaxws:serviceBean>
+	</jaxws:server>
+	
+	<jaxrs:server id="studentService" address="/rs">
+		<jaxrs:serviceBeans>
+			<ref bean="studentServiceBean"/>
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+	
+</beans>
